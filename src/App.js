@@ -12,7 +12,7 @@ export default function App() {
         <Dictionary />
       </main>
       <footer className="App-footer">
-        <small>Coded by Isaboe Hollis</small>
+        <small>Coded by <a href="https://github.com/theartistboe/boes-dictionary-project">Isaboe Hollis 😼</a></small>
       </footer>
       </div>
     </div>
