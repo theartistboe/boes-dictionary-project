@@ -8,16 +8,17 @@ export default function Dictionary() {
     let [results, setResults] = useState(null);
 
     function handleResponse(response) {
-        console.log(response.data[0]);
-        setResults(response.data[0]);
+        console.log(response.data);
+        setResults(response.data);
     }
 
     function search(event) {
         event.preventDefault();
         alert(`Searching for ${keyword} defintion.`);
 
-        let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`;
-        axios.get(apiUrl).then(handleResponse);
+            let apiKey = "aac4foe717bf29a66f74f42ef3fte000";
+            let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
+            axios.get(apiUrl).then(handleResponse);
     }
 
 // Documentation here: https://dictionaryapi.dev/
@@ -31,7 +32,7 @@ export default function Dictionary() {
             <form onSubmit={search}>
                 <input type="search" onChange={handleKeywordChange} />
             </form>
-            <Results results={results}/>
+            <Results results={results} />
         </div>
     );
 }
