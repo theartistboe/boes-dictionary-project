@@ -3,10 +3,11 @@ import axios from "axios";
 import "./Dictionary.css";
 import Results from "./Results.js";
 
-export default function Dictionary() {
-    let [keyword, setKeyword] = useState("");
+export default function Dictionary(props) {
+    let [keyword, setKeyword] = useState(props.defaultKeyword);
     let [results, setResults] = useState(null);
     let [audioResults, setAudioResults] = useState(null);
+    let [loaded, setLoaded] = useState(false);
 
     function handleResponse(response) {
         setResults(response.data);
@@ -20,10 +21,12 @@ export default function Dictionary() {
         }
     }
 
-    function search(event) {
+    function handleSubmit(event) {
         event.preventDefault();
-        alert(`Searching for ${keyword} definition.`);
+        search ();
+    }
 
+    function search() {
         let apiKey = "aac4foe717bf29a66f74f42ef3fte000";
         let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
         axios.get(apiUrl).then(handleResponse);
@@ -37,13 +40,30 @@ export default function Dictionary() {
     function handleKeywordChange(event) {
         setKeyword(event.target.value);
     }
+    
+    function load() {
+        setLoaded(true);
+        search();
+    }
 
+    if (loaded) {
     return (
         <div className="Dictionary">
-            <form onSubmit={search}>
-                <input type="search" onChange={handleKeywordChange} />
+            <section>
+                <h1>What word do you want to look up?</h1>
+            <form onSubmit={handleSubmit}>
+                <input type="search" onChange={handleKeywordChange} 
+                defaultValue={props.defaultKeyword}/>
             </form>
+            <div className="hint">
+                suggested words: sunset, cat, space, weather...
+            </div>
+            </section>
             <Results audioResults={audioResults} results={results} />
         </div>
     );
+    } else {
+        load();
+        return "Loading...";
+    }
 }

@@ -1,6 +1,17 @@
+body {
+	background: linear-gradient(to top, #dfe9f3 0%, white 100%);
+}
+
+a {
+  color: #00adb5;
+}
 .App-header {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #00adb5;
+  font-size: 25px;
   text-align: center;
   margin: 30px 0;
+  font-weight: bold;
 }
 
 .App-footer {
