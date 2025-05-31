@@ -26,11 +26,17 @@ export default function Dictionary(props) {
         search ();
     }
 
+    // She Codes Dictionary API for definitions, examples and synonyms: 
+    // https://api.shecodes.io/dictionary/v1/define?word=book&key=aac4foe717bf29a66f74f42ef3fte000
+
     function search() {
         let apiKey = "aac4foe717bf29a66f74f42ef3fte000";
         let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
         axios.get(apiUrl).then(handleResponse);
 
+       // Dev Dictionary API for audio
+       // https://api.dictionaryapi.dev/api/v2/entries/en/sunset
+       
         let dictionaryApiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`;
         axios.get(dictionaryApiUrl)
             .then(handleDictionaryDevResponse)
